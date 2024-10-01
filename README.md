@@ -30,3 +30,5 @@ This means the robot hostname is `autobot01`, the port is `12345`, and the limit
   * The sliders set the limit of left and right motors, and the default value is obtained from the GET parameters in the URL (see previous section)
 * The bottom is a preview of the camera image stream.
 
+Screenshot of UI as of commit 7fff7a1
+![](https://polybox.ethz.ch/index.php/s/Z2VfjDywtkfvkyb/download)
