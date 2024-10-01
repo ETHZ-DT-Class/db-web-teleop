@@ -6,6 +6,7 @@
 const baseUrl = window.location.hostname;
 // Duckiebot's IP address or [hostname].local
 const ROBOT_IP = baseUrl;
+const ROBOT_HOSTNAME = baseUrl.replace(".local", "");
 const ROSBRIDGE_PORT = '9001';
 
 // Initialize ROSLIB
@@ -40,7 +41,7 @@ ros.on('close', () => {
 // Publisher for WheelsCmd
 const wheelsCmd = new ROSLIB.Topic({
     ros: ros,
-    name: '/autobot01/wheels_driver_node/wheels_cmd',
+    name: `/${ROBOT_HOSTNAME}/wheels_driver_node/wheels_cmd`,
     messageType: 'duckietown_msgs/WheelsCmdStamped'
 });
 
@@ -68,7 +69,7 @@ function sendWheelsCmd(left, right) {
 // Subscriber for camera stream
 const imageListener = new ROSLIB.Topic({
     ros: ros,
-    name: '/autobot01/camera_node/image/compressed',
+    name: `/${ROBOT_HOSTNAME}/camera_node/image/compressed`,
     messageType: 'sensor_msgs/CompressedImage'
 });
 
