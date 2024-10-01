@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Duckiebot Web Joystick</title>
+    <style>
+        /* not scrollable */
+        html, body {
+            overflow: hidden;
+        }
+
+        /* Flex container */
+        .container {
+            display: flex;
+            align-items: center; /* Vertically align joystick and sliders */
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        /* Slider container taking 30% of the row */
+        .slider-area {
+            width: 30%;
+            display: flex;
+            flex-direction: column; /* Stack sliders vertically */
+            gap: 20px;  /* Space between sliders */
+        }
+
+        /* Joystick area takes up 70% of the row */
+        .joystick-area {
+            width: 70%;
+            display: flex;
+            justify-content: center; /* Center the joystick in this area */
+        }
+
+        /* Styles for the joystick container and joystick */
+        #joystick-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border: 2px solid #333;
+            margin: 20px auto;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+
+        #joystick {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #ff0000;
+            border-radius: 50%;
+            top: 135px; /* Centered */
+            left: 135px; /* Centered */
+            cursor: pointer;
+            transition: top 0.1s, left 0.1s;
+        }
+
+        /* Vertical line */
+        #vertical-line {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: #333;
+            top: 0;
+            left: 50%;  /* Center the line horizontally */
+            transform: translateX(-50%);  /* Adjust to perfectly center */
+        }
+
+        /* Horizontal line */
+        #horizontal-line {
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background-color: #333;
+            top: 50%;  /* Center the line vertically */
+            left: 0;
+            transform: translateY(-50%);  /* Adjust to perfectly center */
+        }
+
+        /* Style for the video stream */
+        #video-stream {
+            display: block;
+            margin: 20px auto;
+            max-width: 640px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            user-select: none;
+        }
+
+        /* X, Y range limits */
+        .slider-container {
+            margin: 20px;
+            user-select: none;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center; user-select: none;">Duckiebot Web Teleop</h1>
+    <h3 id="info-banner" style="text-align:center; user-select: none;">...</h3>
+
+    <div class="container">
+        <div class="joystick-area">
+
+        <div id="joystick-container">
+            <div id="vertical-line"></div>
+            <div id="horizontal-line"></div>
+            <div id="joystick"></div>
+        </div>
+        </div>
+
+        <div class="slider-area">
+            <div class="slider-container">
+                <label for="slider1">Wheel Limit LEFT: <span id="slider1-value">0</span>%</label><br/>
+                <input type="range" id="slider1" min="0" max="100" step="1">
+            </div>
+            <div class="slider-container">
+                <label for="slider2">Wheel Limit RIGHT: <span id="slider2-value">0</span>%</label><br/>
+                <input type="range" id="slider2" min="0" max="100" step="1">
+            </div>
+        </div>
+
+    </div>
+
+    <img id="video-stream" src="" alt="Waiting for Camera Stream">
+    
+    <!-- Include ROSLIBJS -->
+    <script src="lib/roslib.min.js"></script>
+    <!-- Include your custom JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
